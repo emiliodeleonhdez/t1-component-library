@@ -11,6 +11,8 @@
     "test:cov": "jest --coverage"
   },
   "dependencies": {
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.519.0",
     "next": "15.3.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
@@ -31,6 +33,7 @@
     "jest-environment-jsdom": "^30.0.2",
     "tailwindcss": "^4",
     "ts-jest": "^29.4.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   }
 }
