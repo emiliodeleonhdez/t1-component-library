@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "DestiladoHD | Ecommerce",
-  description: "Compra el mejor destilado de agave.",
+  title: "T1",
+  description: "T1",
 };
 
 export default function RootLayout({
