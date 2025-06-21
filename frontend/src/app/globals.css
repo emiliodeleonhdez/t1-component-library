@@ -10,14 +10,19 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-brand-background: #0d1b2a;
+  --color-brand-surface: #1b263b;
+  --color-brand-primary: #415a77;
+  --color-brand-secondary: #778da9;
+  --color-brand-foreground: #e0e1dd;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
 
 body {
   background: var(--background);
