@@ -1,10 +1,9 @@
-import React from "react";
-import { Button } from "../components/atoms/Button";
+import { Button } from "../components/atoms/Button/Button";
 import { Coffee, Home, ShieldAlert, TriangleAlert } from "lucide-react";
 export default function ButtonPage() {
   return (
     <div className="flex flex-col gap-6">
-      <h2 className="font-bold text-3xl">Buttons</h2>
+      <h2 className="font-bold text-3xl">Button Component</h2>
       <h3 className="font-bold text-xl">Standard Buttons</h3>
       <div className="flex flex-wrap gap-4">
         <Button variant="primary">Primary button</Button>
