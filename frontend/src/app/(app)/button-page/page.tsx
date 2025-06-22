@@ -1,4 +1,4 @@
-import { Button } from "../components/atoms/Button/Button";
+import { Button } from "../../components/atoms/Button/Button";
 import { Coffee, Home, ShieldAlert, TriangleAlert } from "lucide-react";
 export default function ButtonPage() {
   return (

@@ -1,7 +1,6 @@
 "use client";
-
+import { Modal } from "@/app/components/atoms/Modal/Modal";
 import { useState } from "react";
-import { Modal } from "../components/atoms/Modal/Modal";
 
 export default function ModalPage() {
   const [openSmall, setOpenSmall] = useState(false);
