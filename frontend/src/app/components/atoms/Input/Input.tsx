@@ -57,20 +57,16 @@ export const Input: React.FC<InputProps> = ({
           {label}
         </label>
       )}
-      <form>
-        <input
-          autoComplete="off"
-          id={uniqueId}
-          disabled={disabled}
-          className={clsx(
-            "rounded p-2 w-full",
-            getStateClasses(state, disabled)
-          )}
-          placeholder={placeHolder}
-          type={inputType}
-          {...props}
-        />
-      </form>
+
+      <input
+        autoComplete="off"
+        id={uniqueId}
+        disabled={disabled}
+        className={clsx("rounded p-2 w-full", getStateClasses(state, disabled))}
+        placeholder={placeHolder}
+        type={inputType}
+        {...props}
+      />
       {helperText && (
         <p className={getHelperTextClasses(state)}>{helperText}</p>
       )}
