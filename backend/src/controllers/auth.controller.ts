@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { User } from "../models/User";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 export const registerUser = async (req: Request, res: Response) => {
   const { email, password } = req.body;
@@ -23,13 +24,28 @@ export const registerUser = async (req: Request, res: Response) => {
   }
 };
 
-// export const loginUser = (req: Request, res: Response) => {
-//   const { email, password } = req.body;
+export const loginUser = async (req: Request, res: Response) => {
+  const { email, password } = req.body;
 
-//   if (email === "admin@admin.com" && password === "123456") {
-//     const token = jwt.sign({ email }, "mi_secreto", { expiresIn: "1h" });
-//     return res.json({ token });
-//   }
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      res.status(401).json({ message: "User not found" });
+      return;
+    }
 
-//   return res.status(401).json({ error: "Credenciales inválidas" });
-// };
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) res.status(401).json({ message: "Invalid credentials" });
+
+    const token = jwt.sign(
+      { userId: user._id, email: user.email },
+      process.env.JWT_SECRET as string,
+      { expiresIn: "1h" }
+    );
+
+    res.json({ token });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server Error" });
+  }
+};
