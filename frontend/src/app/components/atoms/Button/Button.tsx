@@ -38,7 +38,6 @@ const sizeClasses: Record<Size, string> = {
   md: "h-10 px-4 text-base",
   lg: "h-12 px-5 text-lg",
 };
-clsx;
 
 export const Button: React.FC<ButtonProps> = ({
   variant = "primary",
