@@ -1,6 +1,13 @@
 "use client";
 import SidebarItem from "../atoms/Sidebar/SidebarItem";
-import { FileAxis3D, FileInput, HomeIcon, Mouse } from "lucide-react";
+import {
+  FileAxis3D,
+  FileInput,
+  HomeIcon,
+  IdCardLanyard,
+  LayoutDashboard,
+  Mouse,
+} from "lucide-react";
 
 const SideBar = () => {
   return (
@@ -10,6 +17,13 @@ const SideBar = () => {
         textColor="text-white"
         icon={<HomeIcon className="w-5 h-5" color="#3e9392" />}
         title="Home"
+      />
+      <SidebarItem
+        href="/dashboard"
+        disabled={true}
+        textColor="text-white"
+        icon={<LayoutDashboard className="w-5 h-5" color="#3e9392" />}
+        title="Dashboard"
       />
       <SidebarItem
         href="/button-page"
@@ -28,6 +42,12 @@ const SideBar = () => {
         textColor="text-white"
         icon={<FileAxis3D className="w-5 h-5" color="#3e9392" />}
         title="Modal"
+      />
+      <SidebarItem
+        href="/card-page"
+        textColor="text-white"
+        icon={<IdCardLanyard className="w-5 h-5" color="#3e9392" />}
+        title="Card"
       />
     </div>
   );

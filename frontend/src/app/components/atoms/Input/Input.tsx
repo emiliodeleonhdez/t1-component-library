@@ -49,21 +49,28 @@ export const Input: React.FC<InputProps> = ({
   disabled = false,
   ...props
 }) => {
+  const uniqueId = `${Math.random().toString(36).substring(2, 9)}`;
   return (
     <div className="input-container flex flex-col gap-2">
       {label && (
-        <label className="font-bold" htmlFor={props.id || label}>
+        <label className="font-bold" htmlFor={uniqueId}>
           {label}
         </label>
       )}
-      <input
-        id={props.id || label}
-        disabled={disabled}
-        className={clsx("rounded p-2 w-full", getStateClasses(state, disabled))}
-        placeholder={placeHolder}
-        type={inputType}
-        {...props}
-      />
+      <form>
+        <input
+          autoComplete="off"
+          id={uniqueId}
+          disabled={disabled}
+          className={clsx(
+            "rounded p-2 w-full",
+            getStateClasses(state, disabled)
+          )}
+          placeholder={placeHolder}
+          type={inputType}
+          {...props}
+        />
+      </form>
       {helperText && (
         <p className={getHelperTextClasses(state)}>{helperText}</p>
       )}
