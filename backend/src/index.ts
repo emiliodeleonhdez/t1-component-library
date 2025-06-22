@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import authRoutes from "./routes/auth.routes";
+import { connectDB } from "./db";
 
 const apiVersion = "/api";
 
@@ -18,6 +19,8 @@ app.get(`${apiVersion}/health`, (_, res) => {
 
 app.use(`${apiVersion}/auth`, authRoutes);
 
-app.listen(PORT, () => {
-  console.log(`Backend Server running on http://localhost:${PORT} 🔥🔥🔥`);
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log(`Backend Server running on http://localhost:${PORT} 🔥🔥🔥`);
+  });
 });
