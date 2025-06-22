@@ -57,9 +57,8 @@ export default function LoginPage() {
       document.cookie = `token=${token}; path=/;`;
 
       router.push("/");
-    } catch (err: any) {
-      const message = err.response?.data?.message || "Error al iniciar sesión";
-      setError(message);
+    } catch (err: unknown) {
+      setError(err as string);
     }
   };
 
