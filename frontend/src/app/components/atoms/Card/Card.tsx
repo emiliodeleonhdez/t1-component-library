@@ -53,6 +53,8 @@ const Card: React.FC<CardProps> = ({
     >
       {imageSrc && (
         <Image
+          width={800}
+          height={192}
           src={imageSrc}
           alt={imageAlt}
           className="w-full h-48 object-cover"
