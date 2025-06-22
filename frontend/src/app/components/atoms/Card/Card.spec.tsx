@@ -6,8 +6,8 @@ const baseProps = {
   size: "sm" as const,
   title: "This is my card",
   subTitle: "Card subtitle",
-  body: <p>I'm the body</p>,
-  footer: <p>I'm the footer</p>,
+  body: <p>Im the body</p>,
+  footer: <p>Im the footer</p>,
 };
 
 const generateMockCard = (props = {}) => {
