@@ -1,4 +1,5 @@
 import ButtonPage from "./button-page/page";
+import CardPage from "./card-page/page";
 import InputPage from "./input-page/page";
 import ModalPage from "./modal-page/page";
 
@@ -8,6 +9,7 @@ export default function Home() {
       <ButtonPage />
       <InputPage />
       <ModalPage />
+      <CardPage />
     </section>
   );
 }

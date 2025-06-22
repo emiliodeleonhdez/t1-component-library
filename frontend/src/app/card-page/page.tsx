@@ -86,7 +86,7 @@ export default function CardPage() {
           size="sm"
           title="Default"
           subTitle="Card subtitle"
-          body={<p>I'm a card with default border</p>}
+          body={<p>Im a card with default border</p>}
           footer={<p>im the footer</p>}
           borderStyle="default"
         />
@@ -95,7 +95,7 @@ export default function CardPage() {
           size="sm"
           title="Outlined"
           subTitle="Card subtitle"
-          body={<p>I'm a card with outlined border</p>}
+          body={<p>Im a card with outlined border</p>}
           footer={<p>im the footer</p>}
           borderStyle="outlined"
         />
@@ -104,7 +104,7 @@ export default function CardPage() {
           size="sm"
           title="Dashed"
           subTitle="Card subtitle"
-          body={<p>I'm a card with dashed border</p>}
+          body={<p>Im a card with dashed border</p>}
           footer={<p>im the footer</p>}
           borderStyle="dashed"
         />
@@ -113,7 +113,7 @@ export default function CardPage() {
           size="sm"
           title="None"
           subTitle="Card subtitle"
-          body={<p>I'm a card with none border</p>}
+          body={<p>Im a card with none border</p>}
           footer={<p>im the footer</p>}
           borderStyle="none"
         />

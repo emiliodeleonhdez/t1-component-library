@@ -1,5 +1,6 @@
 import React from "react";
 import clsx from "clsx";
+import Image from "next/image";
 
 type BorderStyle = "default" | "outlined" | "dashed" | "none";
 type CardSize = "sm" | "md" | "lg";
@@ -44,13 +45,14 @@ const Card: React.FC<CardProps> = ({
     <div
       className={clsx(
         "bg-white rounded-xl shadow-sm overflow-hidden",
+        "w-full",
         borderClasses[borderStyle],
         sizeClasses[size],
         className
       )}
     >
       {imageSrc && (
-        <img
+        <Image
           src={imageSrc}
           alt={imageAlt}
           className="w-full h-48 object-cover"
