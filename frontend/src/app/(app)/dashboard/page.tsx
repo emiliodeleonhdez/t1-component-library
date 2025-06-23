@@ -121,19 +121,10 @@ const Dashboard = () => {
       link.click();
       link.remove();
       window.URL.revokeObjectURL(url);
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error downloading CSV:", error);
-      if (error.response) {
-        const status = error.response.status;
-        if (status === 401 || status === 403) {
-          alert(
-            "You are not authorized to download the data. Please log in again."
-          );
-        } else if (status === 404) {
-          alert("No data found to export.");
-        } else {
-          alert("An error occurred while downloading the CSV.");
-        }
+      if (error) {
+        console.log("Error", error);
       } else {
         alert("Network error or unexpected issue while downloading the CSV.");
       }
@@ -193,7 +184,7 @@ const Dashboard = () => {
         tracking component usage and variants in real time. It features three UI
         controls—a Danger button, an Input field, and a Modal trigger—each
         included to showcase their behavior and to collect usage statistics.
-        Additionally, a "Download Stats in CSV" button is available, allowing
+        Additionally, a Download Stats in CSV button is available, allowing
         users to export the collected statistics and open them in Excel for
         further analysis.
       </p>
