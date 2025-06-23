@@ -10,8 +10,6 @@ A reusable **Component Library** built with **TypeScript**, **Tailwind CSS**, an
 root/
 ├── frontend/                # Component Library UI (Next.js)
 │   ├── components/          # Button, Input, Modal, Card
-│   ├── design/              # Design tokens (colors, spacing, etc.)
-│   ├── __tests__/           # Unit and integration tests
 │   └── ...
 ├── backend/                 # Express + MongoDB API
 │   ├── controllers/
@@ -66,8 +64,6 @@ npm run test
 ### 🎨 Design Tokens
 
 - Implemented in `globals.css`
-- Covers colors, spacing, typography, border-radius
-- Integrated via Tailwind CSS and used across >80% of components
 
 ### 📊 Dashboard Demo
 
