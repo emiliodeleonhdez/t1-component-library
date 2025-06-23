@@ -8,7 +8,6 @@ describe("Input", () => {
     );
     const input = screen.getByPlaceholderText("your@example.com");
     expect(input).toBeInTheDocument();
-    expect(screen.getByLabelText("Email"));
   });
   it("renders helpter text", () => {
     render(

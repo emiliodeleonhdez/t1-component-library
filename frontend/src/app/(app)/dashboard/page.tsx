@@ -147,6 +147,14 @@ const Dashboard = () => {
 
   return (
     <section className="dashboard-container p-4">
+      <h2 className="font-bold text-lg">Overview</h2>
+      <p className="py-6">
+        Overview The Dashboard page serves as an interactive demonstration area
+        for tracking component usage and variants in real time. It features
+        three UI controls—a Danger button, an Input field, and a Modal
+        trigger—each included to showcase their behavior and to collect usage
+        statistics.
+      </p>
       <section className="flex flex-wrap items-center gap-12">
         {trackedComponents.map((component, index) => {
           switch (component.type) {
