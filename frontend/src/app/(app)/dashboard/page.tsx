@@ -3,9 +3,55 @@ import { Button, Variant } from "@/app/components/atoms/Button/Button";
 import { Input } from "@/app/components/atoms/Input/Input";
 import { Modal } from "@/app/components/atoms/Modal/Modal";
 import api from "@/app/lib/axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, ReactNode } from "react";
 
-const trackedComponents = [
+interface ButtonProps {
+  children: ReactNode;
+  size: "sm" | "md" | "lg";
+  variant: Variant;
+}
+
+interface InputProps {
+  label: string;
+  placeHolder: string;
+  inputType: string;
+}
+
+interface ModalProps {
+  title: string;
+  size: "sm" | "md" | "lg";
+  isOpen: boolean;
+  onClose: () => void;
+  children: ReactNode;
+}
+
+interface TrackingInfo {
+  componentName: "Button" | "Input" | "Modal";
+  variant: string;
+  action: string;
+}
+
+interface StatsRecord {
+  componentName: string;
+  variant: string;
+  action: string;
+  timestamp: string;
+}
+
+interface AggregatedStat {
+  componentName: string;
+  variant: string;
+  action: string;
+  count: number;
+  latest: string;
+}
+
+type TrackedComponent =
+  | { type: "button"; props: ButtonProps; tracking: TrackingInfo }
+  | { type: "input"; props: InputProps; tracking: TrackingInfo }
+  | { type: "modal"; props: ModalProps; tracking: TrackingInfo };
+
+const trackedComponents: TrackedComponent[] = [
   {
     type: "button",
     props: {
@@ -51,10 +97,10 @@ const trackedComponents = [
 
 const Dashboard = () => {
   const [buttonStatsFlag, setButtonStatsFlag] = useState(false);
-  const [buttonStats, setButtonStats] = useState([]);
+  const [buttonStats, setButtonStats] = useState<StatsRecord[]>([]);
   const [openModal, setOpenModal] = useState(false);
 
-  const handleTrack = async (tracking: any) => {
+  const handleTrack = async (tracking: TrackingInfo) => {
     try {
       await api.post("/components/track", tracking);
       setButtonStatsFlag((prev) => !prev);
@@ -76,24 +122,27 @@ const Dashboard = () => {
     handleGetStats();
   }, [buttonStatsFlag]);
 
-  const stats = Object.values(
-    buttonStats.reduce((acc: any, curr: any) => {
-      const key = `${curr.componentName}-${curr.variant}-${curr.action}`;
-      if (!acc[key]) {
-        acc[key] = {
-          componentName: curr.componentName,
-          variant: curr.variant,
-          action: curr.action,
-          count: 0,
-          latest: curr.timestamp,
-        };
-      }
-      acc[key].count += 1;
-      if (new Date(curr.timestamp) > new Date(acc[key].latest)) {
-        acc[key].latest = curr.timestamp;
-      }
-      return acc;
-    }, {})
+  const stats: AggregatedStat[] = Object.values(
+    buttonStats.reduce(
+      (acc: Record<string, AggregatedStat>, curr: StatsRecord) => {
+        const key = `${curr.componentName}-${curr.variant}-${curr.action}`;
+        if (!acc[key]) {
+          acc[key] = {
+            componentName: curr.componentName,
+            variant: curr.variant,
+            action: curr.action,
+            count: 0,
+            latest: curr.timestamp,
+          };
+        }
+        acc[key].count += 1;
+        if (new Date(curr.timestamp) > new Date(acc[key].latest)) {
+          acc[key].latest = curr.timestamp;
+        }
+        return acc;
+      },
+      {}
+    )
   );
 
   return (
@@ -106,7 +155,8 @@ const Dashboard = () => {
                 <Button
                   key={index}
                   onClick={() => handleTrack(component.tracking)}
-                  variant={component.props.variant as Variant}
+                  variant={component.props.variant}
+                  size={component.props.size}
                 >
                   <p>{component.props.children}</p>
                 </Button>
@@ -114,31 +164,35 @@ const Dashboard = () => {
             case "input":
               return (
                 <Input
-                  label={component.props.label}
                   key={index}
+                  label={component.props.label}
+                  placeholder={component.props.placeHolder}
+                  type={component.props.inputType}
                   onFocus={() => handleTrack(component.tracking)}
                 />
               );
             case "modal":
               return (
-                <>
+                <div key={index}>
                   <Button
                     onClick={() => {
                       setOpenModal(true);
                       handleTrack(component.tracking);
                     }}
+                    variant="primary"
+                    size="md"
                   >
                     <span>Open Modal</span>
                   </Button>
                   <Modal
-                    key={index}
                     isOpen={openModal}
                     onClose={() => setOpenModal(false)}
                     title={component.props.title}
+                    size={component.props.size}
                   >
-                    <p>Modal Body</p>
+                    {component.props.children}
                   </Modal>
-                </>
+                </div>
               );
             default:
               return null;
@@ -151,7 +205,7 @@ const Dashboard = () => {
           📊 Component Usage Statistics
         </h3>
         <ul className="flex flex-wrap gap-4">
-          {stats.map((stat: any, idx: number) => (
+          {stats.map((stat, idx) => (
             <li
               key={idx}
               className="border rounded p-4 shadow-sm bg-white text-gray-800"

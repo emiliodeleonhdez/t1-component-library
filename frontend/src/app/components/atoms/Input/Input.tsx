@@ -53,14 +53,14 @@ export const Input: React.FC<InputProps> = ({
   return (
     <div className="input-container flex flex-col gap-2">
       {label && (
-        <label className="font-bold" htmlFor={uniqueId}>
+        <label className="font-bold" htmlFor={inputType}>
           {label}
         </label>
       )}
 
       <input
         autoComplete="off"
-        id={uniqueId}
+        id={inputType + "-" + uniqueId}
         disabled={disabled}
         className={clsx("rounded p-2 w-full", getStateClasses(state, disabled))}
         placeholder={placeHolder}
