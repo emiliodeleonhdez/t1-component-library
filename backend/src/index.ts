@@ -4,11 +4,13 @@ import dotenv from "dotenv";
 import authRoutes from "./routes/auth.routes";
 import componentTrackingRoutes from "./routes/componentTracking.routes";
 import { connectDB } from "./db";
+import cookieParser from "cookie-parser";
 
 const apiVersion = "/api";
 
 dotenv.config();
 const app = express();
+app.use(cookieParser());
 const PORT = process.env.PORT || 3001;
 
 app.use(

@@ -100,6 +100,46 @@ const Dashboard = () => {
   const [buttonStats, setButtonStats] = useState<StatsRecord[]>([]);
   const [openModal, setOpenModal] = useState(false);
 
+  const handleCsv = async () => {
+    try {
+      const response = await api.get("/components/export", {
+        responseType: "blob",
+        headers: {
+          Accept: "text/csv",
+        },
+      });
+
+      const blob = new Blob([response.data], {
+        type: "text/csv;charset=utf-8;",
+      });
+      const url = window.URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "component-tracking.csv");
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (error: any) {
+      console.error("Error downloading CSV:", error);
+      if (error.response) {
+        const status = error.response.status;
+        if (status === 401 || status === 403) {
+          alert(
+            "You are not authorized to download the data. Please log in again."
+          );
+        } else if (status === 404) {
+          alert("No data found to export.");
+        } else {
+          alert("An error occurred while downloading the CSV.");
+        }
+      } else {
+        alert("Network error or unexpected issue while downloading the CSV.");
+      }
+    }
+  };
+
   const handleTrack = async (tracking: TrackingInfo) => {
     try {
       await api.post("/components/track", tracking);
@@ -149,11 +189,13 @@ const Dashboard = () => {
     <section className="dashboard-container p-4">
       <h2 className="font-bold text-lg">Overview</h2>
       <p className="py-6">
-        Overview The Dashboard page serves as an interactive demonstration area
-        for tracking component usage and variants in real time. It features
-        three UI controls—a Danger button, an Input field, and a Modal
-        trigger—each included to showcase their behavior and to collect usage
-        statistics.
+        The Dashboard page serves as an interactive demonstration area for
+        tracking component usage and variants in real time. It features three UI
+        controls—a Danger button, an Input field, and a Modal trigger—each
+        included to showcase their behavior and to collect usage statistics.
+        Additionally, a "Download Stats in CSV" button is available, allowing
+        users to export the collected statistics and open them in Excel for
+        further analysis.
       </p>
       <section className="flex flex-wrap items-center gap-12">
         {trackedComponents.map((component, index) => {
@@ -235,6 +277,9 @@ const Dashboard = () => {
             </li>
           ))}
         </ul>
+      </section>
+      <section className="my-3">
+        <Button onClick={handleCsv}>Download Stats in CSV</Button>
       </section>
     </section>
   );
