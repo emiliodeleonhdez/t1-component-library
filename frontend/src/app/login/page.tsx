@@ -52,10 +52,6 @@ export default function LoginPage() {
 
     try {
       const res = await api.post("/auth/login", { email, password });
-      const { token } = res.data;
-
-      document.cookie = `token=${token}; path=/;`;
-
       router.push("/");
     } catch (err: unknown) {
       setError(err as string);
