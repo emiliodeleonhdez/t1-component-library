@@ -77,15 +77,15 @@ export default function LoginPage() {
           <Input
             type="email"
             label="Email"
-            helperText="Ingresa un correo electrónico"
+            helperText="Enter your email"
             placeHolder="your@example.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <Input
             type="password"
-            label="Contraseña"
-            helperText="Ingresa tu contraseña"
+            label="Password"
+            helperText="Enter your password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
