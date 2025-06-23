@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import authRoutes from "./routes/auth.routes";
+import componentTrackingRoutes from "./routes/componentTracking.routes";
 import { connectDB } from "./db";
 
 const apiVersion = "/api";
@@ -23,6 +24,7 @@ app.get(`${apiVersion}/health`, (_, res) => {
 });
 
 app.use(`${apiVersion}/auth`, authRoutes);
+app.use(`${apiVersion}/components`, componentTrackingRoutes);
 
 connectDB().then(() => {
   app.listen(PORT, () => {
