@@ -51,7 +51,7 @@ export default function LoginPage() {
     setError("");
 
     try {
-      const res = await api.post("/auth/login", { email, password });
+      await api.post("/auth/login", { email, password });
       router.push("/");
     } catch (err: unknown) {
       setError(err as string);
