@@ -20,10 +20,9 @@ const SideBar = () => {
       />
       <SidebarItem
         href="/dashboard"
-        disabled={true}
         textColor="text-white"
         icon={<LayoutDashboard className="w-5 h-5" color="#3e9392" />}
-        title="Dashboard"
+        title="Dashboard (Demo)"
       />
       <SidebarItem
         href="/button-page"

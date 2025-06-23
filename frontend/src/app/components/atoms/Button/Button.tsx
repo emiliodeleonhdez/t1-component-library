@@ -1,7 +1,7 @@
 import React from "react";
 import clsx from "clsx";
 
-type Variant = "primary" | "secondary" | "danger" | "warning";
+export type Variant = "primary" | "secondary" | "danger" | "warning";
 type Size = "sm" | "md" | "lg";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {

@@ -20,4 +20,15 @@ describe("Input", () => {
     );
     expect(screen.getByText("Special characters are not allowed"));
   });
+  it("renders a disabled input", () => {
+    const { container } = render(
+      <Input
+        inputType="text"
+        placeHolder="Enter your text here"
+        helperText="Special characters are not allowed"
+        disabled={true}
+      />
+    );
+    expect(container.querySelector(".cursor-not-allowed"));
+  });
 });
